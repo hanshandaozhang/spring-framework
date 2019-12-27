@@ -37,6 +37,7 @@ import org.springframework.lang.Nullable;
  * @since 1.1
  * @see org.springframework.core.io.Resource
  */
+// 作用是读取Spring的配置文件的内容，并将其转换成IOC容器内部的数据结构：BeanDefinition
 public interface BeanDefinitionReader {
 
 	/**
