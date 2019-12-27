@@ -19,6 +19,14 @@ package org.springframework.core.io;
 import org.springframework.lang.Nullable;
 
 /**
+ * <p>用户自定义协议资源解决策略,作为DefaultResourceLoader 的SPI:
+ * 它允许用户自定义资源加载协议,而不需要继承ResourceLoader的子类</p>
+ *
+ * <p>SPI: Service Provider Interface,是一种服务发现机制</p>
+ *
+ * <p>这个接口没有实现类, 它需要用户自定义,自定义的Resolver如何计入Spring体系?</p>
+ * <p>调用DefaultResourceLoader#addProtocolResolver(ProtocolResolver)方法即可</p>
+ *
  * A resolution strategy for protocol-specific resource handles.
  *
  * <p>Used as an SPI for {@link DefaultResourceLoader}, allowing for
@@ -33,6 +41,9 @@ import org.springframework.lang.Nullable;
 public interface ProtocolResolver {
 
 	/**
+	 * <p>使用指定的 ResourceLoader 解析指定的 location
+	 * 若成功, 则返回对应的Resource</p>
+	 *
 	 * Resolve the given location against the given resource loader
 	 * if this implementation's protocol matches.
 	 * @param location the user-specified resource location
