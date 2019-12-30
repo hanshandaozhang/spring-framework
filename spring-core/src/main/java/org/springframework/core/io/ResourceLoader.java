@@ -21,7 +21,9 @@ import org.springframework.util.ResourceUtils;
 
 /**
  * 进行统一资源加载
- * 具体资源加载由相应实现类来完成, 可以将ResourceLoader称为统一资源定位器<br/>
+ * 具体资源加载由相应实现类来完成, 可以将ResourceLoader称为统一资源定位器
+ * 定义资源加载器，主要应用于根据给定的资源文件地址返回对应的 Resource
+ * <br/>
  *
  * Strategy interface for loading resources (e.. class path or file system
  * resources). An {@link org.springframework.context.ApplicationContext}

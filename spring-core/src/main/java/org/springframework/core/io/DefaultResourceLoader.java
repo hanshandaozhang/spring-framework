@@ -141,7 +141,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 		this.resourceCaches.clear();
 	}
 
-	// ResourceLoader的资源加载策略就封装在DefaultResourceLoader中
+	// ResourceLoader的资源加载策略就封装在 DefaultResourceLoader 中
 	@Override
 	public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");
