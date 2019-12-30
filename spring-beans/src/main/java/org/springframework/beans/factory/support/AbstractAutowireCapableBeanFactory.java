@@ -266,6 +266,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	/**
+	 * <p>
+	 *     主要功能是忽略给定接口的自动装配功能. 那么这样做的目的是什么呢？会产生什么样的效果呢？ <br/>
+	 *		举例来说， 当 A 中有属性 B ，那么当 Spring 在获取 A 的 Bean 的时候如果其属性 B 还没有初始化，
+	 *		那么 Spring 会自动初始化 B ，这也是 Spring 提供的一个重要特性。
+	 *		但是， 某些情况下， B 不会被初始化， 其中的一种情况就是 B 实现了 BeanNameAware 接口 。
+	 *		Spring 中是这样介绍的：自动装配时忽略给定的依赖接口， 典型应用是通过其他方式解析 Application 上下文注册依赖，
+	 *		类似于 BeanFactory 通过 BeanFactoryAware 进行注入或者 ApplicationContext 通过 ApplicationContextAware 进行注入 。
+	 * </p>
 	 * Ignore the given dependency interface for autowiring.
 	 * <p>This will typically be used by application contexts to register
 	 * dependencies that are resolved in other ways, like BeanFactory through

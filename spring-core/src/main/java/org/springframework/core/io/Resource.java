@@ -30,6 +30,24 @@ import org.springframework.lang.Nullable;
  * 对资源的抽象，具体子类进行实现。它的每一个实现类都代表了一种资源的访问策略 <br/>
  * 为Spring框架所有资源的抽象和访问接口， 定义了一些通用的方法，由子类AbstractResource提供统一的默认实现 <br/>
  *
+ * <p>
+ *     Resource 接口抽象了所有 Spring 内部使用到的底层资源： File、 URL、 Classpath 等。
+ *     首先， 它定义了 3 个判断当前资源状态的方法：存在性(exists)、可读性(isReadable)、是否处于打开状态(isOpen)。
+ *     另外， Resource 接口还提供了不同资源到 URL(getURL) 、URI(getURI)、 File(getFile) 类型的转换，以及获取 lastModified 属性、
+ *     文件名（不带路径信息的文件名， getFilename()）的方法。
+ *     为了便于操作， Resource 还提供了基于当前资源创建一个相对资惊的方法： createRelative()。
+ *     在错误处理中需要详细地打印出错的资源文件，因而 Resource 还提供了 getDescription()方法用来在错误处理中打印信息 。
+ * </p>
+ *
+ * <p>
+ *     对不同来源的资源文件都有相应的 Resource 实现 ：
+ *     文件（ FileSystemResource ）、
+ *     Classpath 资源（ ClassPathResource ）、
+ *     URL 资源（ UrlResource ）、
+ *     InputStream 资源（ InputStreamResource ）、
+ *     Byte 数组（ ByteArrayResource ）等
+ * </p>
+ *
  * Interface for a resource descriptor that abstracts from the actual
  * type of underlying resource, such as a file or class path resource.
  *
