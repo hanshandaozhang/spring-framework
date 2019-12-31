@@ -68,6 +68,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 	}
 
 	/**
+	 * 一般是Thread.currentTread()#getContextClassLoader()
 	 * Create a new DefaultResourceLoader.
 	 * @param classLoader the ClassLoader to load class path resources with, or {@code null}
 	 * for using the thread context class loader at the time of actual resource access
@@ -162,7 +163,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
 			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
 		}
-		// 4. 根据是否为FileURL,是则返回 FileUrlResource 类型的资源,否则返回 URLResource 类型的资源
+		// 4. 根据是否为文件 URL,是则返回 FileUrlResource 类型的资源,否则返回 URLResource 类型的资源
 		else {
 			try {
 				// Try to parse the location as a URL...

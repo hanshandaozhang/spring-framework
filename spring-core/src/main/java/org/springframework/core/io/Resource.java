@@ -33,8 +33,8 @@ import org.springframework.lang.Nullable;
  * <p>
  *     Resource 接口抽象了所有 Spring 内部使用到的底层资源： File、 URL、 Classpath 等。
  *     首先， 它定义了 3 个判断当前资源状态的方法：存在性(exists)、可读性(isReadable)、是否处于打开状态(isOpen)。
- *     另外， Resource 接口还提供了不同资源到 URL(getURL) 、URI(getURI)、 File(getFile) 类型的转换，以及获取 lastModified 属性、
- *     文件名（不带路径信息的文件名， getFilename()）的方法。
+ *     另外， Resource 接口还提供了不同资源到 URL(getURL) 、URI(getURI)、 File(getFile) 类型的转换，
+ *     以及获取 lastModified 属性、文件名（不带路径信息的文件名， getFilename()）的方法。
  *     为了便于操作， Resource 还提供了基于当前资源创建一个相对资惊的方法： createRelative()。
  *     在错误处理中需要详细地打印出错的资源文件，因而 Resource 还提供了 getDescription()方法用来在错误处理中打印信息 。
  * </p>

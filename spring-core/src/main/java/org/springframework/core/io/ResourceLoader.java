@@ -20,9 +20,9 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ResourceUtils;
 
 /**
+ * 定义资源加载器，主要应用于根据给定的资源文件地址返回对应的 Resource
  * 进行统一资源加载
  * 具体资源加载由相应实现类来完成, 可以将ResourceLoader称为统一资源定位器
- * 定义资源加载器，主要应用于根据给定的资源文件地址返回对应的 Resource
  * <br/>
  *
  * Strategy interface for loading resources (e.. class path or file system
@@ -58,9 +58,9 @@ public interface ResourceLoader {
 	 * 需要调用 <code>Resource#exist()</code> 方法来判断 <br/>
 	 * 该方法支持一下模式的资源加载:
 	 * <uL>
-	 *     <li>URL位置资源, 如: <code>file:C:/test.dat</code></li>
-	 *     <li>ClassPath位置资源, 如: <code>classpath: test.dat</code></li>
-	 *     <li>相对路径资源, 如: <code>WEB-INF/test.dat</code>, 此时返回的Resource实例,根据实现不同而不同</li>
+	 *     <li>URL位置资源, 如: file:C:/test.dat</li>
+	 *     <li>ClassPath位置资源, 如: classpath: test.dat</li>
+	 *     <li>相对路径资源, 如: WEB-INF/test.dat, 此时返回的Resource实例,根据实现不同而不同</li>
 	 * </uL>
 	 *
 	 * Return a Resource handle for the specified resource location.
