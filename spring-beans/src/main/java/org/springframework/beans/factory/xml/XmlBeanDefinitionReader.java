@@ -127,6 +127,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	private boolean namespaceAware = false;
 
+	/**
+	 * documentReader 的类
+	 */
 	private Class<? extends BeanDefinitionDocumentReader> documentReaderClass =
 			DefaultBeanDefinitionDocumentReader.class;
 
@@ -141,6 +144,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	private DocumentLoader documentLoader = new DefaultDocumentLoader();
 
+	/**
+	 * EntityResolver 解析器
+	 */
 	@Nullable
 	private EntityResolver entityResolver;
 
@@ -278,6 +284,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
+	 * <p>
+	 *     如果 ResourceLoader 不为 null，则根据指定的 ResourceLoader 创建一个 ResourceEntityResolver 对象。<br/>
+	 *     如果 ResourceLoader 为 null ，则创建 一个 DelegatingEntityResolver 对象。
+	 *     该 Resolver 委托给默认的 BeansDtdResolver 和 PluggableSchemaResolver 。
+	 * </p>
 	 * Return the EntityResolver to use, building a default resolver
 	 * if none specified.
 	 */
@@ -466,6 +477,28 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	/**
 	 * 获取 XML Document 实例
+	 *
+	 * EntityResolver 的作用就是，通过实现它，应用可以自定义如何寻找【验证文件】的逻辑。
+	 *
+	 * 在 loadDocument 方法中涉及一个参数 EntityResolver ，何为EntityResolver？
+	 * 官网这样解释：如果 SAX 应用程序需要实现自定义处理外部实体，则必须实现此接口并使
+	 * 用 setEntityResolver 方法向SAX 驱动器注册一个实例。也就是说，对于解析一个XML，
+	 * SAX 首先读取该 XML 文档上的声明，根据声明去寻找相应的 DTD 定义，以便对文档进
+	 * 行一个验证。默认的寻找规则，即通过网络（实现上就是声明的DTD的URI地址）来下载
+	 * 相应的DTD声明，并进行认证。下载的过程是一个漫长的过程，而且当网络中断或不可用
+	 * 时，这里会报错，就是因为相应的DTD声明没有被找到的原因。
+	 * <br/>
+	 *
+	 * EntityResolver 的作用是项目本身就可以提供一个如何寻找 DTD 声明的方法，即由程序
+	 * 来实现寻找 DTD 声明的过程，比如我们将 DTD 文件放到项目中某处，在实现时直接将此
+	 * 文档读取并返回给 SAX 即可。这样就避免了通过网络来寻找相应的声明。
+	 *
+	 * 接口方法接收两个参数 publicId 和 systemId ，并返回 InputSource 对象。两个参数声明如下：
+	 * <ul>
+	 *     <li>publicId ：被引用的外部实体的公共标识符，如果没有提供，则返回 null 。</li>
+	 *     <li>systemId ：被引用的外部实体的系统标识符。</li>
+	 * </ul>
+	 *
 	 * Actually load the specified document using the configured DocumentLoader.
 	 * @param inputSource the SAX InputSource to read from
 	 * @param resource the resource descriptor for the XML file
@@ -496,7 +529,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		if (validationModeToUse != VALIDATION_AUTO) {
 			return validationModeToUse;
 		}
-		// 其次，自动获取验证模式
+		// 其次，如果未指定,则使用自动获取验证模式
 		int detectedMode = detectValidationMode(resource);
 		if (detectedMode != VALIDATION_AUTO) {
 			return detectedMode;
@@ -560,13 +593,19 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see BeanDefinitionDocumentReader#registerBeanDefinitions
 	 */
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+		// 使用 DefaultBeanDefinitionDocumentReader 实例化 BeanDefinitionDocumentReader
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+		// 在实例化 BeanDefinitionReader 的时候会将 BeanDefinitionRegistry 传入， 默认使用继承自 DefaultListableBeanFactory 的子类
+		// 记录统计前 BeanDefinition 的个数
 		int countBefore = getRegistry().getBeanDefinitionCount();
+		// 加载及注册 BeanDefinition
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+		// 记录本次加载 BeanDefinition 个数
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 
 	/**
+	 *
 	 * Create the {@link BeanDefinitionDocumentReader} to use for actually
 	 * reading bean definitions from an XML document.
 	 * <p>The default implementation instantiates the specified "documentReaderClass".

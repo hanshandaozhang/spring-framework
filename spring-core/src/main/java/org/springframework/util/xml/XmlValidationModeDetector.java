@@ -98,7 +98,7 @@ public class XmlValidationModeDetector {
 			// <0> 循环，逐行读取 XML 文件的内容。主要是通过读取 XML 文件的内容，来进行自动判断
 			while ((content = reader.readLine()) != null) {
 				content = consumeCommentTokens(content);
-				// 跳过，如果是注释 或者 为空
+				// 如果是注释或者为空行则跳过
 				if (this.inComment || !StringUtils.hasText(content)) {
 					continue;
 				}
