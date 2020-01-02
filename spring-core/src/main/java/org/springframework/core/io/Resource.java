@@ -86,7 +86,7 @@ public interface Resource extends InputStreamSource {
 	/**
 	 * 资源是否可读
 	 * 可以看到，默认情况只要资源存在 就可以读，
-	 * 但是具体还是要实现类实现
+	 * 但是具体还是要看具体实现类
 	 * <br/>
 	 *
 	 * Indicate whether non-empty contents of this resource can be read via

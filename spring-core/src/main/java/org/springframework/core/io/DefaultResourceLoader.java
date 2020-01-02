@@ -69,6 +69,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 
 	/**
 	 * 一般是Thread.currentTread()#getContextClassLoader()
+	 * <br/>
 	 * Create a new DefaultResourceLoader.
 	 * @param classLoader the ClassLoader to load class path resources with, or {@code null}
 	 * for using the thread context class loader at the time of actual resource access

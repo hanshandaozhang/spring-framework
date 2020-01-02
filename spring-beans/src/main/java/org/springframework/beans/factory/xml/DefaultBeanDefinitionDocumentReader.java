@@ -155,6 +155,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 		// 解析前处理, 留给子类实现
 		preProcessXml(root);
+		// 解析 BeanDefinition
 		parseBeanDefinitions(root, this.delegate);
 		// 解析后处理, 留给子类实现
 		postProcessXml(root);
@@ -193,6 +194,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				if (node instanceof Element) {
 					Element ele = (Element) node;
 					// 如果该节点使用默认命名空间，执行默认解析
+					// <bean id="studentService" class="org.springframework.core.StudentService" /> 形式
 					if (delegate.isDefaultNamespace(ele)) {
 						// 对 bean 的处理
 						parseDefaultElement(ele, delegate);
@@ -206,6 +208,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 		else {
 			// <2> 如果根节点非默认命名空间，执行自定义解析
+			// <tx:annotation-driven> 形式
 			delegate.parseCustomElement(root);
 		}
 	}
