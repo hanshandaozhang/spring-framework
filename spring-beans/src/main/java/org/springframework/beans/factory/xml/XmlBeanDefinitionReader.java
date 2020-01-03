@@ -129,6 +129,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	/**
 	 * documentReader 的类
+	 * <p>默认值为 DefaultBeanDefinitionDocumentReader.class</p>
 	 */
 	private Class<? extends BeanDefinitionDocumentReader> documentReaderClass =
 			DefaultBeanDefinitionDocumentReader.class;
@@ -593,14 +594,15 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see BeanDefinitionDocumentReader#registerBeanDefinitions
 	 */
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
-		// 使用 DefaultBeanDefinitionDocumentReader 实例化 BeanDefinitionDocumentReader
+		//  <1> 使用 DefaultBeanDefinitionDocumentReader 实例化 BeanDefinitionDocumentReader
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		// 在实例化 BeanDefinitionReader 的时候会将 BeanDefinitionRegistry 传入， 默认使用继承自 DefaultListableBeanFactory 的子类
-		// 记录统计前 BeanDefinition 的个数
+		// <2> 获取加载前 BeanDefinition 的个数
 		int countBefore = getRegistry().getBeanDefinitionCount();
-		// 加载及注册 BeanDefinition
+		// <3> 创建 XmlReaderContext 对象
+		// <4> 加载及注册 BeanDefinition
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
-		// 记录本次加载 BeanDefinition 个数
+		// 计算本次加载 BeanDefinition 个数
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 
@@ -616,6 +618,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	}
 
 	/**
+	 * 创建 XmlReaderContext 对象
+	 * <br/>
 	 * Create the {@link XmlReaderContext} to pass over to the document reader.
 	 */
 	public XmlReaderContext createReaderContext(Resource resource) {
