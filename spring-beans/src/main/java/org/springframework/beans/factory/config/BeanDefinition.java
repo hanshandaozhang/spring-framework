@@ -23,6 +23,23 @@ import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 
 /**
+ * BeanDefinition 的三个实现类
+ * <ol>
+ * 	<li>org.springframework.beans.factory.support.ChildBeanDefinition</li>
+ * 	<li>org.springframework.beans.factory.support.RootBeanDefinition</li>
+ *	<li>org.springframework.beans.factory.support.GenericBeanDefinition</li>
+ * </ol>
+ *
+ * <p>
+ *     ChildBeanDefinition、RootBeanDefinition、GenericBeanDefinition 三者都继承 AbstractBeanDefinition 抽象类，
+ *     即 AbstractBeanDefinition 对三个子类的共同的类信息进行抽象。
+ * 	   如果配置文件中定义了父 <bean> 和 子 <bean> ，则父 <bean> 用 RootBeanDefinition 表示，
+ * 	   子 <bean> 用 ChildBeanDefinition 表示，而没有父 <bean> 的就使用RootBeanDefinition 表示。
+ * </p>
+ * <p>
+ *    GenericBeanDefinition 为一站式服务类
+ * </p>
+ *
  * A BeanDefinition describes a bean instance, which has property values,
  * constructor argument values, and further information supplied by
  * concrete implementations.

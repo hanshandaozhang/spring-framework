@@ -50,6 +50,9 @@ public class XmlReaderContext extends ReaderContext {
 
 	private final XmlBeanDefinitionReader reader;
 
+	/**
+	 * NamespaceHandler 解析器
+	 */
 	private final NamespaceHandlerResolver namespaceHandlerResolver;
 
 
