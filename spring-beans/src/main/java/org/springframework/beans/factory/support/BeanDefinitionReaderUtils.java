@@ -62,11 +62,11 @@ public abstract class BeanDefinitionReaderUtils {
 
 		// 创建 GenericBeanDefinition 对象
 		GenericBeanDefinition bd = new GenericBeanDefinition();
-		// 设置 parentName
+		// 设置 parentName, parentName 可能为空
 		bd.setParentName(parentName);
 		if (className != null) {
 			if (classLoader != null) {
-				// 设置 beanClass
+				// 如果 classLoader 不为空, 则使用以传入的 classloader 同一虚拟机加载类对象, 否则只是记录 className
 				bd.setBeanClass(ClassUtils.forName(className, classLoader));
 			}
 			else {
@@ -181,6 +181,7 @@ public abstract class BeanDefinitionReaderUtils {
 		String[] aliases = definitionHolder.getAliases();
 		if (aliases != null) {
 			for (String alias : aliases) {
+				// 通过别名注册
 				registry.registerAlias(beanName, alias);
 			}
 		}

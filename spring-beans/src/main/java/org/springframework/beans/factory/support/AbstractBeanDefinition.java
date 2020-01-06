@@ -60,6 +60,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 		implements BeanDefinition, Cloneable {
 
 	/**
+	 * <p>
+	 *     bean 的作用范围, 对应 bean 属性 scope
+	 * </p>
 	 * Constant for the default scope name: {@code ""}, equivalent to singleton
 	 * status unless overridden from a parent bean definition (if applicable).
 	 */
@@ -144,62 +147,147 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private String scope = SCOPE_DEFAULT;
 
+	/**
+	 * 是否是抽象, 对应 bean 属性 abstract
+	 */
 	private boolean abstractFlag = false;
 
+	/**
+	 * 是否延迟加载, 对应 bean 属性 lazy-init
+	 */
 	@Nullable
 	private Boolean lazyInit;
 
+	/**
+	 * 自动注入模式, 对应 bean 属性 autowire
+	 */
 	private int autowireMode = AUTOWIRE_NO;
 
+	/**
+	 * 依赖检查, Spring 3.0 后弃用这个属性
+	 */
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
 
+	/**
+	 * 用来描述一个 bean 的实例依赖另一个 bean 先实例化, 对应 bean 属性 depends-on
+	 */
 	@Nullable
 	private String[] dependsOn;
 
+	/**
+	 *  autowire-candidate 属性设置为 false, 这样容器在查找自动装配对象时,
+	 *  将不考虑该 bean, 即它不会被考虑作为其他 bean 自动装配的候选者,
+	 *  但是该 bean 还是可以使用自动装配来注入其他 bean
+	 * 对应 bean 属性  autowire-candidate
+	 */
 	private boolean autowireCandidate = true;
 
+	/**
+	 * 自动装配当出现多个候选者是,将作为首要候选者, 对应 bean 属性 primary
+	 */
 	private boolean primary = false;
 
+	/**
+	 * 用于记录 Qualifiers, 对应子元素 qualifier
+	 */
 	private final Map<String, AutowireCandidateQualifier> qualifiers = new LinkedHashMap<>();
+
 
 	@Nullable
 	private Supplier<?> instanceSupplier;
 
+	/**
+	 * 允许访问非公开的构造器和方法, 程序设置
+	 */
 	private boolean nonPublicAccessAllowed = true;
 
+	/**
+	 * 是否以一种宽松模式解析构造函数, 默认为 true
+	 * 如果为false, 则存在如下情况
+	 * interface ITest {}
+	 * class ITestImpl implements ITest {}
+	 * class Main {
+	 *     Main(ITest i) {}
+	 *     Main( ITestImpl i ) {}
+	 * }
+	 * Spring 抛出异常,因为无法准确定位到构造函数
+	 * 程序设置
+	 */
 	private boolean lenientConstructorResolution = true;
 
+	/**
+	 * 对应 bean 属性的 factory-bean, 用法:
+	 * <bean id="instanceFactoryBean" class="example.chapter3.InstanceFactoryBean" ／>
+	 * <bean id="currentTime" factory-bean = "InstanceFactoryBean" factory-method＝"createTime"/>
+	 */
 	@Nullable
 	private String factoryBeanName;
 
+	/**
+	 * 对应 bean 属性 factory-method
+	 */
 	@Nullable
 	private String factoryMethodName;
 
+	/**
+	 * 记录构造函数注入属性, 对应 bean 属性 constructor-args
+	 */
 	@Nullable
 	private ConstructorArgumentValues constructorArgumentValues;
 
+	/**
+	 * 普通属性集合
+	 */
 	@Nullable
 	private MutablePropertyValues propertyValues;
 
+	/**
+	 * 方法重写的持有者, 记录 lookup-method, replace-method 元素
+	 */
 	private MethodOverrides methodOverrides = new MethodOverrides();
 
+	/**
+	 * 初始化方法, 对应 bean 属性 init-method
+	 */
 	@Nullable
 	private String initMethodName;
 
+	/**
+	 * 销毁方法, 对应 bean 属性 destory-method
+	 */
 	@Nullable
 	private String destroyMethodName;
 
+	/**
+	 * 是否执行init-method, 程序设置
+	 */
 	private boolean enforceInitMethod = true;
 
+	/**
+	 * 是否执行 destory-method, 程序设置
+	 */
 	private boolean enforceDestroyMethod = true;
 
+	/**
+	 * 是否是用户定义的而不是应用程序本身定义的, 创建AOP时为true, 程序设置
+	 */
 	private boolean synthetic = false;
 
+	/**
+	 * 定义这个 bean 的应用 , APPLICATION: 用户，INFRASTRUCTURE: 完全内部使用,与用户无关.SUPPORT:某些复杂配置的一部分
+	 * 程序设置
+	 */
 	private int role = BeanDefinition.ROLE_APPLICATION;
 
+	/**
+	 * bean 的描述信息
+	 */
 	@Nullable
 	private String description;
 
+	/**
+	 * 这个 bean 定义的资源
+	 */
 	@Nullable
 	private Resource resource;
 

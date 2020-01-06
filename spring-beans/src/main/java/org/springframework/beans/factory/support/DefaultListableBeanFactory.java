@@ -916,6 +916,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 		// <1> 校验 BeanDefinition
 		// 这是注册前的最后一次校验了，主要是对属性 methodOverrides 进行校验
+		//  校验 methodOverrides 是否与工厂方法并存或者 methodOverrides 对应的方法根本不存在
 		if (beanDefinition instanceof AbstractBeanDefinition) {
 			try {
 				((AbstractBeanDefinition) beanDefinition).validate();

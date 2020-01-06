@@ -244,7 +244,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	protected void importBeanDefinitionResource(Element ele) {
 		// <1> 获取 resource 的属性值， 这个值表示资源的路径
 		String location = ele.getAttribute(RESOURCE_ATTRIBUTE);
-		// 为空， 直接退出
+		// Resource为空，直接退出, 不做任何处理
 		if (!StringUtils.hasText(location)) {
 			getReaderContext().error("Resource location must not be empty", ele); // 使用 problemReporter 报错
 			return;
@@ -285,11 +285,14 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 		// <5> 相对路径
+		// 如果是相对路径,则根据相对路径算出绝对路径
 		else {
 			// No URL -> considering resource location as relative to the current file.
 			try {
 				int importCount;
 				// 创建相对地址的 Resource
+				// Resource存在多个子实现类, 如VfsResource, FileSystemResource等
+				// 而每个 Resource 的 createRelative 方法实现都不一样, 所以这里先选择子类的方法实现解析
 				Resource relativeResource = getReaderContext().getResource().createRelative(location);
 				// 存在
 				if (relativeResource.exists()) {
@@ -298,7 +301,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 					// 添加到 actualResources 中
 					actualResources.add(relativeResource);
 				}
-				// 不存在
+				// 不存在,或者解析不成功,则使用默认的解析器 ResourcePattenResolver 进行解析
 				else {
 					// 获取根路径地址
 					String baseLocation = getReaderContext().getResource().getURL().toString();
@@ -328,7 +331,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * Process the given alias element, registering the alias with the registry.
 	 */
 	protected void processAliasRegistration(Element ele) {
+		// 获取 beanName
 		String name = ele.getAttribute(NAME_ATTRIBUTE);
+		// 获取 alias
 		String alias = ele.getAttribute(ALIAS_ATTRIBUTE);
 		boolean valid = true;
 		if (!StringUtils.hasText(name)) {
@@ -341,12 +346,14 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 		if (valid) {
 			try {
+				// 注册 alias
 				getReaderContext().getRegistry().registerAlias(name, alias);
 			}
 			catch (Exception ex) {
 				getReaderContext().error("Failed to register alias '" + alias +
 						"' for bean with name '" + name + "'", ele, ex);
 			}
+			// 别名注册后通知监听器做相应处理
 			getReaderContext().fireAliasRegistered(name, alias, extractSource(ele));
 		}
 	}
