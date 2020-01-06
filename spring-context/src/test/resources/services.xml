@@ -5,6 +5,8 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 		<bean id="xmlTest" class="org.springframework.context.LoadXmlTest">
+			<constructor-arg type="java.lang.String" value="Jack" />
+
 		</bean>
 
 </beans>
