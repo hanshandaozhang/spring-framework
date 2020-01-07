@@ -53,6 +53,10 @@ public abstract class BeanFactoryUtils {
 	public static final String GENERATED_BEAN_NAME_SEPARATOR = "#";
 
 	/**
+	 * <p>
+	 *     缓存 {@link #transformedBeanName(String)} 已经转换好的结果。
+	 * </p>
+	 *
 	 * Cache from name with factory bean prefix to stripped name without dereference.
 	 * @since 5.1
 	 * @see BeanFactory#FACTORY_BEAN_PREFIX
@@ -72,6 +76,14 @@ public abstract class BeanFactoryUtils {
 	}
 
 	/**
+	 * <p>
+	 *     去除 FactoryBean 的修饰符 &
+	 * </p>
+	 * <p>
+	 *     如果 name 以 “&” 为前缀，那么会去掉该 "&" 。 <br/>
+	 *     例如，name = "&studentService" ，则会是 name = "studentService"。
+	 * </p>
+	 *
 	 * Return the actual bean name, stripping out the factory dereference
 	 * prefix (if any, also stripping repeated factory prefixes if found).
 	 * @param name the name of the bean
@@ -83,6 +95,9 @@ public abstract class BeanFactoryUtils {
 		if (!name.startsWith(BeanFactory.FACTORY_BEAN_PREFIX)) {
 			return name;
 		}
+		// computeIfAbsent 方法，分成两种情况：
+		//      1. 未存在，则进行计算执行，并将结果添加到缓存、
+		//      2. 已存在，则直接返回，无需计算。
 		return transformedBeanNameCache.computeIfAbsent(name, beanName -> {
 			do {
 				beanName = beanName.substring(BeanFactory.FACTORY_BEAN_PREFIX.length());

@@ -621,7 +621,7 @@ public class BeanDefinitionParserDelegate {
 		if (isDefaultValue(lazyInit)) {
 			lazyInit = this.defaults.getLazyInit();
 		}
-		// 若没有设置号或设置成其他字符都会被设置为 false
+		// 若没有设置好或设置成其他字符都会被设置为 false
 		bd.setLazyInit(TRUE_VALUE.equals(lazyInit));
 
 		// 解析 autowire 属性

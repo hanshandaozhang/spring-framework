@@ -56,9 +56,11 @@ public class LoadXmlTest {
 //		GenericApplicationContext context = new GenericApplicationContext();
 //		new XmlBeanDefinitionReader(context).loadBeanDefinitions("service.xml");
 //		context.refresh();
-		LoadXmlTest test = context.getBean("xmlTest", LoadXmlTest.class);
-		test.print();
+//		LoadXmlTest test = context.getBean("xmlTest", LoadXmlTest.class);
+//		test.print();
 
+		TestBean bean = (TestBean) context.getBean("testBean");
+		bean.print();
 //		System.out.println(Introspector.decapitalize("LoadXmlTest") );
 
 //		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("services.xml"));

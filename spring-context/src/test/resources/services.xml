@@ -9,4 +9,13 @@
 
 		</bean>
 
+		<bean id="testBean" class="org.springframework.context.TestBean"
+			scope="singleton" init-method="testInitMethod" destroy-method="testDestroyMethod"
+		>
+			<constructor-arg type="java.lang.Long" value="123" />
+			<constructor-arg type="java.lang.String" value="Tom" />
+		</bean>
+
+		<alias name="testBean" alias="bean, beanTest"/>
+
 </beans>

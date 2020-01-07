@@ -253,7 +253,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	private String initMethodName;
 
 	/**
-	 * 销毁方法, 对应 bean 属性 destory-method
+	 * 销毁方法, 对应 bean 属性 destroy-method
 	 */
 	@Nullable
 	private String destroyMethodName;
@@ -264,7 +264,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	private boolean enforceInitMethod = true;
 
 	/**
-	 * 是否执行 destory-method, 程序设置
+	 * 是否执行 destroy-method, 程序设置
 	 */
 	private boolean enforceDestroyMethod = true;
 
