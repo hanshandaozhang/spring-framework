@@ -603,6 +603,7 @@ public class BeanDefinitionParserDelegate {
 		}
 		// 解析 singleton 属性
 		else if (ele.hasAttribute(SCOPE_ATTRIBUTE)) {
+			// Spring 2.x "scope" attribute
 			bd.setScope(ele.getAttribute(SCOPE_ATTRIBUTE));
 		}
 		else if (containingBean != null) {
@@ -890,6 +891,7 @@ public class BeanDefinitionParserDelegate {
 			}
 		}
 		else {
+			// 没有 index 属性则忽略去属性， 自动查找
 			try {
 				this.parseState.push(new ConstructorArgumentEntry());
 				// 解析 ele 对应属性元素

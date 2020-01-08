@@ -9,13 +9,27 @@
 
 		</bean>
 
-		<bean id="testBean" class="org.springframework.context.TestBean"
+		<bean id="user" class="org.springframework.context.lookup.User"
 			scope="singleton" init-method="testInitMethod" destroy-method="testDestroyMethod"
 		>
+			<meta key="id" value="123"/>
 			<constructor-arg type="java.lang.Long" value="123" />
 			<constructor-arg type="java.lang.String" value="Tom" />
 		</bean>
 
-		<alias name="testBean" alias="bean, beanTest"/>
+<!--		<alias name="teacher" alias="test, beanTest"/>-->
+
+	<bean id="teacher" class="org.springframework.context.lookup.Teacher" />
+
+	<bean id="getBeanTest" class="org.springframework.context.lookup.GetBeanTest">
+		<!-- lookup-method的作用是将teacher所代表的 bean 作为 getBean 的返回值 -->
+		<lookup-method name="getBean" bean="teacher"/>
+	</bean>
+
+	<bean id="testChangeMethod" class="org.springframework.context.replaced.TestChangeMethod">
+		<replaced-method name="changeMe" replacer="replacer"/>
+	</bean>
+
+	<bean id="replacer" class="org.springframework.context.replaced.TestMethodReplacer" />
 
 </beans>

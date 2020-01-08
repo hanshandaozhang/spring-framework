@@ -1,15 +1,7 @@
 package org.springframework.context;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.lookup.User;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
-
-import java.beans.Introspector;
 
 /**
  * @author meisen
@@ -59,7 +51,7 @@ public class LoadXmlTest {
 //		LoadXmlTest test = context.getBean("xmlTest", LoadXmlTest.class);
 //		test.print();
 
-		TestBean bean = (TestBean) context.getBean("testBean");
+		User bean = (User) context.getBean("testBean");
 		bean.print();
 //		System.out.println(Introspector.decapitalize("LoadXmlTest") );
 

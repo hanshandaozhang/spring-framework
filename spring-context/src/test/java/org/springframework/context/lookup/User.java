@@ -1,22 +1,26 @@
-package org.springframework.context;
+package org.springframework.context.lookup;
 
 /**
  * @author meisen
  * @date 2020-01-07
  */
-public class TestBean {
+public class User {
 	private Long testId;
 
 	private String testName;
 
 	private int testAge;
 
-	public TestBean() {
+	public User() {
 	}
 
-	public TestBean(Long testId, String testName) {
+	public User(Long testId, String testName) {
 		this.testId = testId;
 		this.testName = testName;
+	}
+
+	public void showMe() {
+		System.out.println("I'am a user");
 	}
 
 	private void testInitMethod() {
