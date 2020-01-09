@@ -5,18 +5,18 @@ package org.springframework.context.lookup;
  * @date 2020-01-07
  */
 public class User {
-	private Long testId;
+	private Long userId;
 
-	private String testName;
+	private String userName;
 
 	private int testAge;
 
 	public User() {
 	}
 
-	public User(Long testId, String testName) {
-		this.testId = testId;
-		this.testName = testName;
+	public User(Long userId, String userName) {
+		this.userId = userId;
+		this.userName = userName;
 	}
 
 	public void showMe() {

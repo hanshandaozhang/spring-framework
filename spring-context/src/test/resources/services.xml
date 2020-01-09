@@ -17,6 +17,15 @@
 			<constructor-arg type="java.lang.String" value="Tom" />
 		</bean>
 
+<!--		<bean id="user2" class="org.springframework.context.lookup.User">-->
+<!--			<constructor-arg>-->
+<!--				<map>-->
+<!--					<entry key="userId" value="123" />-->
+<!--					<entry key="userName" value="Jerry"/>-->
+<!--				</map>-->
+<!--			</constructor-arg>-->
+<!--		</bean>-->
+
 <!--		<alias name="teacher" alias="test, beanTest"/>-->
 
 	<bean id="teacher" class="org.springframework.context.lookup.Teacher" />

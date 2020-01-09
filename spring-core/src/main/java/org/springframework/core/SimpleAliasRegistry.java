@@ -50,7 +50,8 @@ public class SimpleAliasRegistry implements AliasRegistry {
 
 
 	@Override
-	public void registerAlias(String name, String alias) {
+	public void
+	registerAlias(String name, String alias) {
 		Assert.hasText(name, "'name' must not be empty");
 		Assert.hasText(alias, "'alias' must not be empty");
 		synchronized (this.aliasMap) {

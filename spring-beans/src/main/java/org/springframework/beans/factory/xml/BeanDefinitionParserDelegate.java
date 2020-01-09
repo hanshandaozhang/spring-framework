@@ -998,6 +998,7 @@ public class BeanDefinitionParserDelegate {
 				"<constructor-arg> element");
 
 		// <1> 查找子节点中，是否有 ref、value、list 等元素
+		// 一种属性只能有一种类型： ref、value、list
 		// Should only have one child element: ref, value, list, etc.
 		NodeList nl = ele.getChildNodes();
 		Element subElement = null;
@@ -1023,6 +1024,11 @@ public class BeanDefinitionParserDelegate {
 		// <1> 多个元素存在，报错，存在冲突。
 		if ((hasRefAttribute && hasValueAttribute) || // 1. ref 和 value 都存在
 				((hasRefAttribute || hasValueAttribute) && subElement != null)) { // 2. ref he value 存在一，并且 subElement 存在
+			/*
+			 * 在constructor-arg 上不存在：
+			 * 	1. 同时存在 ref 属性又有 value 属性
+			 * 	2. 存在 ref 属性或者 value 属性且又有子元素
+			 */
 			error(elementName +
 					" is only allowed to contain either 'ref' attribute OR 'value' attribute OR sub-element", ele);
 		}
@@ -1092,6 +1098,7 @@ public class BeanDefinitionParserDelegate {
 			boolean toParent = false;
 			if (!StringUtils.hasLength(refName)) {
 				// A reference to the id of another bean in a parent context.
+				// 解析 local
 				refName = ele.getAttribute(PARENT_REF_ATTRIBUTE);
 				toParent = true;
 				if (!StringUtils.hasLength(refName)) {
@@ -1490,6 +1497,9 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
+	 * <p>
+	 *     如果需要的话就对 beanDefinition 进行装饰
+	 * </p>
 	 * Decorate the given bean definition through a namespace handler, if applicable.
 	 * @param ele the current element
 	 * @param originalDef the current bean definition
@@ -1500,6 +1510,8 @@ public class BeanDefinitionParserDelegate {
 	}
 
 	/**
+	 * containingBd 是父类 bean, 当对某个嵌套配置进行分析时，这里需要传递父类beanDefinition
+	 * <br/>
 	 * Decorate the given bean definition through a namespace handler, if applicable.
 	 * @param ele the current element
 	 * @param originalDef the current bean definition
@@ -1547,9 +1559,9 @@ public class BeanDefinitionParserDelegate {
 
 		// <1> 获取自定义标签的命名空间
 		String namespaceUri = getNamespaceURI(node);
-		// <2> 过滤掉默认命名标签 如果不是默认的命名空间，则根据该命名空间获取相应的处理器。
+		// <2> 过滤掉默认命名标签. 如果不是默认的命名空间，则根据该命名空间获取相应的处理器。
 		if (namespaceUri != null && !isDefaultNamespace(namespaceUri)) {
-			// <2> 获取相应的处理器
+			// <2> 根据命名空间获取相应的处理器
 			NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 			if (handler != null) {
 				// <3> 进行装饰处理
