@@ -20,6 +20,9 @@ import org.springframework.beans.factory.Aware;
 import org.springframework.core.io.ResourceLoader;
 
 /**
+ * <p>
+ *     底层访问资源的加载器
+ * </p>
  * Interface to be implemented by any object that wishes to be notified of the
  * {@link ResourceLoader} (typically the ApplicationContext) that it runs in.
  * This is an alternative to a full {@link ApplicationContext} dependency via

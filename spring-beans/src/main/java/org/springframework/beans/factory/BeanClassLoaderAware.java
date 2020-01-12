@@ -17,6 +17,10 @@
 package org.springframework.beans.factory;
 
 /**
+ *
+ * <p>
+ *     加载Spring Bean的类加载器
+ * </p>
  * Callback that allows a bean to be aware of the bean
  * {@link ClassLoader class loader}; that is, the class loader used by the
  * present bean factory to load bean classes.

@@ -20,6 +20,9 @@ import org.springframework.beans.factory.Aware;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 
 /**
+ * <p>
+ *     加载Spring Bean时织入第三方模块，如AspectJ
+ * </p>
  * Interface to be implemented by any object that wishes to be notified
  * of the application context's default {@link LoadTimeWeaver}.
  *

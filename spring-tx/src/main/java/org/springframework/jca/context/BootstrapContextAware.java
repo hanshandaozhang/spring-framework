@@ -21,6 +21,9 @@ import javax.resource.spi.BootstrapContext;
 import org.springframework.beans.factory.Aware;
 
 /**
+ * <p>
+ *     资源适配器BootstrapContext，如JCA,CCI
+ * </p>
  * Interface to be implemented by any object that wishes to be
  * notified of the BootstrapContext (typically determined by the
  * {@link ResourceAdapterApplicationContext}) that it runs in.

@@ -19,6 +19,9 @@ package org.springframework.jmx.export.notification;
 import org.springframework.beans.factory.Aware;
 
 /**
+ * <p>
+ *     JMX通知
+ * </p>
  * Interface to be implemented by any Spring-managed resource that is to be
  * registered with an {@link javax.management.MBeanServer} and wishes to send
  * JMX {@link javax.management.Notification javax.management.Notifications}.

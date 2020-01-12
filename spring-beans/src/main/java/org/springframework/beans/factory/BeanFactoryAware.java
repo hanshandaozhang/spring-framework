@@ -19,6 +19,10 @@ package org.springframework.beans.factory;
 import org.springframework.beans.BeansException;
 
 /**
+ *
+ * <p>
+ *     声明BeanFactory
+ * </p>
  * Interface to be implemented by beans that wish to be aware of their
  * owning {@link BeanFactory}.
  *
