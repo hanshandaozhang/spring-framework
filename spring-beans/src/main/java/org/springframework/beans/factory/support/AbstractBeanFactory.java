@@ -292,13 +292,11 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				String nameToLookup = originalBeanName(name);
 				// 原型模式依赖检查
 				// 如果，父类容器为 AbstractBeanFactory ，直接递归查找
-				// <3> 因为 Spring只解决单例模式下的循环依赖，在原型模式下的如果存在循环依赖则会抛出异常
 				if (parentBeanFactory instanceof AbstractBeanFactory) {
 					return ((AbstractBeanFactory) parentBeanFactory).doGetBean(
 							nameToLookup, requiredType, args, typeCheckOnly);
 				}
 				// 用明确的 args 从 parentBeanFactory 中，获取 Bean 对象
-				// <4> 如果容器中没有找到，则从父类容器中加载
 				else if (args != null) {
 					// Delegation to parent with explicit args.
 					return (T) parentBeanFactory.getBean(nameToLookup, args);
