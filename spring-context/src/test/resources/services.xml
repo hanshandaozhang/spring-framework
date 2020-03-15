@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		<bean id="xmlTest" class="org.springframework.context.LoadXmlTest">
+			<constructor-arg type="java.lang.String" value="Jack" />
+
+		</bean>
+
+		<bean id="user" class="org.springframework.context.lookup.User"
+			scope="singleton" init-method="testInitMethod" destroy-method="testDestroyMethod"
+		>
+			<meta key="id" value="123"/>
+			<constructor-arg type="java.lang.Long" value="123" />
+			<constructor-arg type="java.lang.String" value="Tom" />
+		</bean>
+
+<!--		<bean id="user2" class="org.springframework.context.lookup.User">-->
+<!--			<constructor-arg>-->
+<!--				<map>-->
+<!--					<entry key="userId" value="123" />-->
+<!--					<entry key="userName" value="Jerry"/>-->
+<!--				</map>-->
+<!--			</constructor-arg>-->
+<!--		</bean>-->
+
+<!--		<alias name="teacher" alias="test, beanTest"/>-->
+
+	<bean id="teacher" class="org.springframework.context.lookup.Teacher" />
+
+	<bean id="getBeanTest" class="org.springframework.context.lookup.GetBeanTest">
+		<!-- lookup-method的作用是将teacher所代表的 bean 作为 getBean 的返回值 -->
+		<lookup-method name="getBean" bean="teacher"/>
+	</bean>
+
+	<bean id="testChangeMethod" class="org.springframework.context.replaced.TestChangeMethod">
+		<replaced-method name="changeMe" replacer="replacer"/>
+	</bean>
+
+	<bean id="replacer" class="org.springframework.context.replaced.TestMethodReplacer" />
+
+</beans>
