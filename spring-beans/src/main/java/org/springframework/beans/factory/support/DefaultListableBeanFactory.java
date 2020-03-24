@@ -937,7 +937,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			// 如果存在但不允许覆盖，抛出异常
 			if (!isAllowBeanDefinitionOverriding()) {
 				throw new BeanDefinitionOverrideException(beanName, beanDefinition, existingDefinition);
-			// 覆盖 BeanDefinition 大于 被覆盖的BeanDefinition 的 ROLE，打印 info 日志
+			// 新的 BeanDefinition 大于 被覆盖的BeanDefinition 的 ROLE，打印 info 日志
 			} else if (existingDefinition.getRole() < beanDefinition.getRole()) {
 
 
@@ -947,7 +947,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 							"' with a framework-generated bean definition: replacing [" +
 							existingDefinition + "] with [" + beanDefinition + "]");
 				}
-			// 覆盖 BeanDefinition 与被覆盖的 BeanDefinition 不相同，打印 Debug 日志
+			// 新 BeanDefinition 与被覆盖的 BeanDefinition 不相同，打印 Debug 日志
 			} else if (!beanDefinition.equals(existingDefinition)) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Overriding bean definition for bean '" + beanName +
