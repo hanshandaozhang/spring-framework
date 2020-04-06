@@ -2,7 +2,7 @@
 #
  
 git filter-branch --force --env-filter '
-    if [ "$GIT_COMMITTER_NAME" = "meisen" ];
+    if [ "$GIT_COMMITTER_NAME" = "hanshanjs" ];
     then
         GIT_COMMITTER_NAME="hshanx";
         GIT_COMMITTER_EMAIL="ms915818993@163.com";
