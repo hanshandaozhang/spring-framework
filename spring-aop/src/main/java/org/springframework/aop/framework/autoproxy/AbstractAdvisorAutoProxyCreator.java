@@ -81,6 +81,10 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	}
 
 	/**
+	 *
+	 * 获取所有的增强以及寻找所有增强中适用于 bean 增强并应用。 <br/>
+	 * 那么 findCandidateAdvisors 与 findAdvisorsThatCanApply就是做了这两件事情
+	 * 当然 ，如果无法找到对应的增强器便返回 DO_NOT_PROXY ，其 DO_NOT_PROXY=null
 	 * Find all eligible Advisors for auto-proxying this class.
 	 * @param beanClass the clazz to find advisors for
 	 * @param beanName the name of the currently proxied bean

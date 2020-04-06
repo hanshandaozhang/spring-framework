@@ -17,6 +17,15 @@
 package org.springframework.core.env;
 
 /**
+ * <p>
+ *     环境，Profile 和 PropertyResolver 的组合。
+ *     Environment 对象的作用，是确定哪些配置文件（如果有）当前处于活动状态，
+ *     以及默认情况下哪些配置文件（如果有）应处于活动状态。properties 在几乎
+ *     所有应用程序中都发挥着重要作用，并且有多种来源：属性文件，JVM 系统属性，
+ *     系统环境变量，JNDI，servlet 上下文参数，ad-hoc 属性对象，映射等。同时
+ *     它继承 PropertyResolver 接口，所以与属性相关的 Environment 对象其主要
+ *     是为用户提供方便的服务接口，用于配置属性源和从中属性源中解析属性。
+ * </p>
  * Interface representing the environment in which the current application is running.
  * Models two key aspects of the application environment: <em>profiles</em> and
  * <em>properties</em>. Methods related to property access are exposed via the
@@ -83,6 +92,7 @@ public interface Environment extends PropertyResolver {
 	 * @see ConfigurableEnvironment#setActiveProfiles
 	 * @see AbstractEnvironment#ACTIVE_PROFILES_PROPERTY_NAME
 	 */
+	// 返回此环境下激活的配置文件集
 	String[] getActiveProfiles();
 
 	/**
@@ -92,6 +102,7 @@ public interface Environment extends PropertyResolver {
 	 * @see ConfigurableEnvironment#setDefaultProfiles
 	 * @see AbstractEnvironment#DEFAULT_PROFILES_PROPERTY_NAME
 	 */
+	// 如果未设置激活配置文件，则返回默认的激活的配置文件集
 	String[] getDefaultProfiles();
 
 	/**

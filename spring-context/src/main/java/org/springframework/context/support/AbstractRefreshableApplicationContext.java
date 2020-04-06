@@ -141,7 +141,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			beanFactory.setSerializationId(getId());
 			// 定制 BeanFactory 设置相关属性
 			customizeBeanFactory(beanFactory);
-			// 加载 BeanDefinition 们
+			// 加载 BeanDefinition
 			loadBeanDefinitions(beanFactory);
 			// 设置 Context 的 BeanFactory
 			synchronized (this.beanFactoryMonitor) {

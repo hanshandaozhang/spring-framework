@@ -165,6 +165,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<Class<?>, Object> resolvableDependencies = new ConcurrentHashMap<>(16);
 
 	/** Map of bean definition objects, keyed by bean name. */
+	// 注册表，由 BeanDefinition 的标识 （beanName） 与其实例组成
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
 
 	/** Map of singleton and non-singleton bean names, keyed by dependency type. */
@@ -174,6 +175,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<Class<?>, String[]> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
 	/** List of bean definition names, in registration order. */
+	// 标识（beanName）集合
 	private volatile List<String> beanDefinitionNames = new ArrayList<>(256);
 
 	/** List of names of manually registered singletons, in registration order. */
@@ -935,7 +937,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			// 如果存在但不允许覆盖，抛出异常
 			if (!isAllowBeanDefinitionOverriding()) {
 				throw new BeanDefinitionOverrideException(beanName, beanDefinition, existingDefinition);
-			// 覆盖 BeanDefinition 大于 被覆盖的BeanDefinition 的 ROLE，打印 info 日志
+			// 新的 BeanDefinition 大于 被覆盖的BeanDefinition 的 ROLE，打印 info 日志
 			} else if (existingDefinition.getRole() < beanDefinition.getRole()) {
 
 
@@ -945,7 +947,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 							"' with a framework-generated bean definition: replacing [" +
 							existingDefinition + "] with [" + beanDefinition + "]");
 				}
-			// 覆盖 BeanDefinition 与被覆盖的 BeanDefinition 不相同，打印 Debug 日志
+			// 新 BeanDefinition 与被覆盖的 BeanDefinition 不相同，打印 Debug 日志
 			} else if (!beanDefinition.equals(existingDefinition)) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Overriding bean definition for bean '" + beanName +

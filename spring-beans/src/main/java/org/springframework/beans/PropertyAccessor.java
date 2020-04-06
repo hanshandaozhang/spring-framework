@@ -22,6 +22,10 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.lang.Nullable;
 
 /**
+ * <p>
+ *     可以访问属性的通用型接口（例如对象的 bean 属性或者对象中的字段），
+ *     作为 BeanWrapper 的基础接口
+ * </p>
  * Common interface for classes that can access named properties
  * (such as bean properties of an object or fields in an object)
  * Serves as base interface for {@link BeanWrapper}.
@@ -72,6 +76,8 @@ public interface PropertyAccessor {
 
 
 	/**
+	 * 判断指定 property 是否可读，是否包含 getter 方法。
+	 *
 	 * Determine whether the specified property is readable.
 	 * <p>Returns {@code false} if the property doesn't exist.
 	 * @param propertyName the property to check
@@ -81,6 +87,8 @@ public interface PropertyAccessor {
 	boolean isReadableProperty(String propertyName);
 
 	/**
+	 * 判断指定 property 是否可写,是否包含 setter 方法。
+	 *
 	 * Determine whether the specified property is writable.
 	 * <p>Returns {@code false} if the property doesn't exist.
 	 * @param propertyName the property to check
@@ -90,6 +98,8 @@ public interface PropertyAccessor {
 	boolean isWritableProperty(String propertyName);
 
 	/**
+	 * 获取指定 propertyName 的类型
+	 *
 	 * Determine the property type for the specified property,
 	 * either checking the property descriptor or checking the value
 	 * in case of an indexed or mapped element.
@@ -117,6 +127,8 @@ public interface PropertyAccessor {
 	TypeDescriptor getPropertyTypeDescriptor(String propertyName) throws BeansException;
 
 	/**
+	 * 设置指定 propertyValue
+	 *
 	 * Get the current value of the specified property.
 	 * @param propertyName the name of the property to get the value of
 	 * (may be a nested path and/or an indexed/mapped property)

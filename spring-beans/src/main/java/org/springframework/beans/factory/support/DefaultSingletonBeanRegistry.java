@@ -76,7 +76,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 *
 	 * 存放的是单例 bean 的映射   <br/>
 	 *
-	 * 对应关系为 bean name --> bean instance
+	 * 对应关系为 bean name --> bean instance <br/>
+	 *
+	 * 一级缓存：用于存放完全初始化好的 bean
 	 * */
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
@@ -85,7 +87,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 *
 	 * 存放的是 ObjectFactory，可以理解为创建单例 bean 的 factory 。 <br/>
 	 *
-	 * 对应关系是 bean name --> ObjectFactory
+	 * 对应关系是 bean name --> ObjectFactory <br/>
+	 *
+	 * 三级级缓存：存放 bean 工厂对象，用于解决循环依赖
 	 * */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
@@ -101,9 +105,21 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * 所以当在 bean 的创建过程中，就可以通过 getBean() 方法获取。 <br/>
 	 *
 	 * 这个 Map 也是【循环依赖】的关键所在。
+	 * <br/>
+	 *
+	 * 二级缓存：存放原始的 bean 对象（尚未填充属性），用于解决循环依赖
 	 *
 	 * */
 	private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
+
+	/**
+	 bean 的获取过程：先从一级获取，失败再从二级、三级里面获取
+
+	 创建中状态：是指对象已经 new 出来了但是所有的属性均为 null 等待被 init
+	 */
+	/**
+	 * -------------------------------------------------------
+	 */
 
 	/** Set of registered singletons, containing the bean names in registration order. */
 	private final Set<String> registeredSingletons = new LinkedHashSet<>(256);
