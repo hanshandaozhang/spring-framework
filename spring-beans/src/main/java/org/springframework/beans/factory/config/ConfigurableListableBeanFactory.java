@@ -24,6 +24,9 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.lang.Nullable;
 
 /**
+ * BeanFactory 配直清单，指定忽略类型及接口等 。
+ * <br/>
+ *
  * Configuration interface to be implemented by most listable bean factories.
  * In addition to {@link ConfigurableBeanFactory}, it provides facilities to
  * analyze and modify bean definitions, and to pre-instantiate singletons.

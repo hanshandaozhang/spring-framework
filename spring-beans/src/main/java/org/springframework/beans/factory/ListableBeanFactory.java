@@ -25,7 +25,6 @@ import org.springframework.lang.Nullable;
 
 /**
  * 根据各种条件获取 bean 的配置清单 <br/>
- * o
  *
  * Extension of the {@link BeanFactory} interface to be implemented by bean factories
  * that can enumerate all their bean instances, rather than attempting bean lookup

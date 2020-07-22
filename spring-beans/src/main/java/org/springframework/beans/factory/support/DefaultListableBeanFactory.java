@@ -87,8 +87,12 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * Bean加载核心部分, 是 Spring 注册和加载的默认实现<br/>
  *
+ * Bean加载核心部分, 是 Spring 注册和加载的默认实现<br/>
+ * 继承了 AbstractAutowireCapableBeanFactory, 并实现了ConfigurableListableBeanFactory 和 BeanDefinitionRegistry
+ *	<br/>
+ * 主要是对 bean 注册后的处理
+ * <br/>
  * Spring's default implementation of the {@link ConfigurableListableBeanFactory}
  * and {@link BeanDefinitionRegistry} interfaces: a full-fledged bean factory
  * based on bean definition metadata, extensible through post-processors.
@@ -106,7 +110,7 @@ import org.springframework.util.StringUtils;
  * <p>For an alternative implementation of the
  * {@link org.springframework.beans.factory.ListableBeanFactory} interface,
  * have a look at {@link StaticListableBeanFactory}, which manages existing
- * bean instances rather than creating new ones based on bean definitions.
+ * bean instances rather than creating new oneAutowireCapableBeanFactorys based on bean definitions.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

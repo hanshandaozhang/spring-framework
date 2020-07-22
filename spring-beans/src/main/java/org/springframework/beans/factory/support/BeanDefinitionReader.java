@@ -24,6 +24,7 @@ import org.springframework.lang.Nullable;
 /**
  * 主要定义资源文件读取并转换为 BeanDefinition 的各个功能
  * <br/>
+ * 作用是读取Spring的配置文件的内容，并将其转换成IOC容器内部的数据结构：BeanDefinition
  * Simple interface for bean definition readers.
  * Specifies load methods with Resource and String location parameters.
  *
@@ -39,7 +40,6 @@ import org.springframework.lang.Nullable;
  * @since 1.1
  * @see org.springframework.core.io.Resource
  */
-// 作用是读取Spring的配置文件的内容，并将其转换成IOC容器内部的数据结构：BeanDefinition
 public interface BeanDefinitionReader {
 
 	/**

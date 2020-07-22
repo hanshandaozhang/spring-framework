@@ -21,6 +21,14 @@ import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 
 /**
+ * 定义获取Bean 及 bean 的各种属性
+ * <br/>
+ *
+ * 为管理对象提供一系列配置接口
+ * 一个非常纯粹的 bean 容器，它是 IoC 必备的数据结构，其中 BeanDefinition 是它的基本结构。
+ * BeanFactory 内部维护着一个BeanDefinition map ，并可根据 BeanDefinition 的描述进行 bean 的创建和管理。
+ * DefaultListableBeanFactory 为最终默认实现，它实现了所有接口。
+ *
  * The root interface for accessing a Spring bean container.
  * This is the basic client view of a bean container;
  * further interfaces such as {@link ListableBeanFactory} and
@@ -113,10 +121,6 @@ import org.springframework.lang.Nullable;
  * @see DisposableBean#destroy
  * @see org.springframework.beans.factory.support.RootBeanDefinition#getDestroyMethodName
  */
-// 为管理对象提供一系列配置接口
-//	一个非常纯粹的 bean 容器，它是 IoC 必备的数据结构，其中 BeanDefinition 是它的基本结构。
-//	BeanFactory 内部维护着一个BeanDefinition map ，并可根据 BeanDefinition 的描述进行 bean 的创建和管理。
-//	DefaultListableBeanFactory 为最终默认实现，它实现了所有接口。
 public interface BeanFactory {
 
 	/**

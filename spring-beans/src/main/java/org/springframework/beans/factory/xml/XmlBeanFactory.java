@@ -22,7 +22,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.io.Resource;
 
 /**
- * XmlBeanFactory 对 DefaultListableBeanFactorγ 类进行了扩展，
+ * XmlBeanFactory 对 DefaultListableBeanFactory 类进行了扩展，
  * 主要用于从 XML 文档中读取 BeanDefinition ，
  * 对于注册及获取 bean 都是使用从父类 DefaultListableBeanFactory 继承的方法去实现，
  * 而唯独与父类不同的个性化实现就是增加了 XmlBeanDefinitionReader 类型的 reader 属性。

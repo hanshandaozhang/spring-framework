@@ -30,7 +30,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
 
 /**
- * 主要使用 map 作为 alias 的缓存, 并对接口 aliasRegistry 进行实现
+ * 主要使用 map 作为 alias 的缓存, 并对接口 AliasRegistry 进行实现
  * <br/>
  * Simple implementation of the {@link AliasRegistry} interface.
  * Serves as base class for
