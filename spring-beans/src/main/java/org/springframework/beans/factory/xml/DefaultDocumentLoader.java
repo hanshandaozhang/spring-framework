@@ -101,7 +101,8 @@ public class DefaultDocumentLoader implements DocumentLoader {
 			// XSD 模式下，设置 factory 的属性
 			if (validationMode == XmlValidationModeDetector.VALIDATION_XSD) {
 				// Enforce namespace aware for XSD...
-				factory.setNamespaceAware(true); // XSD 模式下，强制设置命名空间支持
+				// XSD 模式下，强制设置命名空间支持
+				factory.setNamespaceAware(true);
 				// 设置 SCHEMA_LANGUAGE_ATTRIBUTE
 				try {
 					factory.setAttribute(SCHEMA_LANGUAGE_ATTRIBUTE, XSD_SCHEMA_LANGUAGE);

@@ -222,17 +222,20 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * @param delegate 委派类
 	 */
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
-		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) { // import
+		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
+			// 对 import 标签的解析
 			importBeanDefinitionResource(ele);
 		}
-		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) { // alias
+		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
+			// 对 alias 标签的解析
 			processAliasRegistration(ele);
 		}
-		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) { // bean
+		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+			// 对 bean 标签的解析
 			processBeanDefinition(ele, delegate);
 		}
-		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) { // beans
-			// recurse
+		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
+			// 对 beans 标签的解析
 			doRegisterBeanDefinitions(ele);
 		}
 	}
