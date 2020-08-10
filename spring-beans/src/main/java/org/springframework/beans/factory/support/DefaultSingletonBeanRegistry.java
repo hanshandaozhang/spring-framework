@@ -250,7 +250,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		Object singletonObject = this.singletonObjects.get(beanName);
 		// 缓存中的 bean 为空，且当前 bean 正在创建
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
-			// 加锁
+			// 如果为空, 则锁定全局变量并进行处理
 			synchronized (this.singletonObjects) {
 				// 从 earlySingletonObjects 获取
 				singletonObject = this.earlySingletonObjects.get(beanName);
